@@ -51,7 +51,7 @@ total_square=0
 for i in range (5):
     total_square=total_square + C_square[i]
 
-Var_S3=(total_square-(expected_S3**2)/n_path)/(n_path-1)
+Var_S3=(total_square-((total**2)/n_path))/(n_path-1)
 msg2='Variance of S(3) based on the simulation is %.13f' %Var_S3
 print (msg2)
 
