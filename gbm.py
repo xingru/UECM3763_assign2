@@ -16,7 +16,7 @@ S[:,1:]=S0*p.exp(nu*t[1:]+sigma*B[:,1:])
 
 #calculate the theoretical expectation and variance
 TheoExp_S3=S0*p.exp(mu*3)
-TheoVar_S3=(S0**2)*(p.exp(2*mu*3))*(p.exp(sigma*sigma*3))-1
+TheoVar_S3=(S0**2)*(p.exp(2*mu*3))*(p.exp(sigma*sigma*3)-1)
 
 msg5='The theoretical expectation of S(3) is %.13f' %TheoExp_S3
 msg6='The theoretical variance of S(3) is %.13f'%TheoVar_S3
