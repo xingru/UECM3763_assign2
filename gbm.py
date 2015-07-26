@@ -1,12 +1,13 @@
 import pylab as p
+import numpy as np
 
 #Setup parameters
 mu = 0.1 ; sigma=0.26; S0=39;
-n_path=5 ; n = n_partitions=1000;
+n_path=1000 ; n = n_partitions=1000;period=3;
 
 #Create Brownian paths
 t=p.linspace(0,3,n+1);
-dB=p.randn(n_path,n+1) / p.sqrt (n); dB[:,0]=0;
+dB=p.randn(n_path,n+1) / p.sqrt (n/period); dB[:,0]=0;
 B=dB.cumsum(axis=1);
 
 #Calculating stock prices
@@ -23,18 +24,23 @@ msg6='The theoretical variance of S(3) is %.13f'%TheoVar_S3
 print ( msg5 )
 print ( msg6 )
 
+#pick 5 path randomly
+S_random_row=np.random.randint(n_path,size=5)
+S1=S[S_random_row,:]
+
 #plot the graph
 p.xlabel('time, $t$',fontsize=16)
 p.ylabel('Stock Price at time t, S(t)',fontsize=16)
 p.title('Geometric Brownian Motion',fontsize=20)
-p.plot(t,S.transpose ());p.show();
+p.plot(t,S1.transpose ());p.show();
+
 
 Z=S.transpose()
 #to get the last value of the vector
 C=Z[-1,:]
 total = 0
 
-for i in range (5):    
+for i in range (n_path):    
     total=total +C[i]
     
 #to find the expected value of S(3)
@@ -48,7 +54,7 @@ print (msg1)
 C_square=C*C
 
 total_square=0
-for i in range (5):
+for i in range (n_path):
     total_square=total_square + C_square[i]
 
 Var_S3=(total_square-((total**2)/n_path))/(n_path-1)
@@ -57,7 +63,7 @@ print (msg2)
 
 count = 0
 Total=0
-for i in range (5):
+for i in range (n_path):
     if C[i]>39:
         count=count+1
         Total=Total + C[i]
